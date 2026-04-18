@@ -261,7 +261,7 @@ function SetupForm({ onDone }) {
 
   return (
     <div
-      className="rp-screen"
+      className="rp-screen rp-hide-scroll"
       style={{
         flex: 1,
         minHeight: "100%",
