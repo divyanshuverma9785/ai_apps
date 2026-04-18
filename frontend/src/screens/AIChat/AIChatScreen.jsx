@@ -121,15 +121,15 @@ Batao kya jaanna chahte ho! 😊`,
       <div
         ref={scrollerRef}
         className="rp-hide-scroll"
-        style={{ flex: 1, overflowY: "auto", padding: "16px 14px 140px" }}
+        style={{ flex: 1, overflowY: "auto", padding: "18px 16px 140px" }}
       >
         {messages.map((m, i) => <Bubble key={i} m={m} />)}
         {loading && (
-          <div style={{ display: "flex", gap: 8, alignItems: "flex-end", marginTop: 8 }}>
-            <div style={{ width: 26, height: 26, borderRadius: "50%", background: "var(--rp-yellow)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--rp-deep)" }}>
+          <div style={{ display: "flex", gap: 8, alignItems: "flex-start", marginTop: 8 }}>
+            <div style={{ width: 28, height: 28, borderRadius: "50%", background: "var(--rp-yellow)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--rp-deep)", marginTop: 2 }}>
               <Sparkles size={15} />
             </div>
-            <div style={{ background: "var(--rp-dark)", padding: "14px 16px", borderRadius: "16px 16px 16px 4px" }}>
+            <div style={{ background: "var(--rp-dark)", padding: "14px 16px", borderRadius: "4px 16px 16px 16px" }}>
               <ChatDots />
             </div>
           </div>
@@ -232,31 +232,33 @@ function Bubble({ m }) {
   const isAI = m.from === "ai";
   return (
     <div style={{
-      display: "flex", gap: 8, alignItems: "flex-end",
+      display: "flex", gap: 8, alignItems: "flex-start",
       justifyContent: isAI ? "flex-start" : "flex-end",
-      marginBottom: 10,
+      marginBottom: 12,
     }} className="rp-slide-up">
       {isAI && (
         <div style={{
-          width: 26, height: 26, borderRadius: "50%", background: "var(--rp-yellow)",
-          display: "flex", alignItems: "center", justifyContent: "center", color: "var(--rp-deep)", flexShrink: 0,
+          width: 28, height: 28, borderRadius: "50%", background: "var(--rp-yellow)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          color: "var(--rp-deep)", flexShrink: 0, marginTop: 2,
         }}>
-          <Sparkles size={14} />
+          <Sparkles size={15} />
         </div>
       )}
       <div style={{
-        maxWidth: "78%",
+        maxWidth: "76%",
         background: isAI ? "var(--rp-dark)" : "var(--rp-yellow)",
         color: isAI ? "var(--rp-lavender)" : "var(--rp-deep)",
         padding: "12px 16px",
-        borderRadius: isAI ? "16px 16px 16px 4px" : "16px 16px 4px 16px",
+        borderRadius: isAI ? "4px 16px 16px 16px" : "16px 4px 16px 16px",
         fontSize: 14,
         lineHeight: 1.55,
         whiteSpace: "pre-wrap",
         boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+        wordBreak: "break-word",
       }}>
         {m.text}
-        <div style={{ fontSize: 10, opacity: 0.5, marginTop: 4, textAlign: isAI ? "left" : "right" }}>
+        <div style={{ fontSize: 10, opacity: 0.55, marginTop: 6, textAlign: isAI ? "left" : "right" }}>
           {m.time}
         </div>
       </div>
