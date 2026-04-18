@@ -18,24 +18,30 @@ function Shell() {
   const { onboarded } = useApp();
   const { pathname } = useLocation();
 
-  // Hide bottom nav on onboarding
   const hideNav = !onboarded || pathname === "/onboarding";
+  // AI chat has its own fixed input, so it handles scroll internally — no outer scroll
+  const fullHeightScreen = pathname === "/ai" || pathname === "/onboarding";
 
   return (
     <div className="rp-phone-shell">
       <div className="rp-phone">
-        <Routes>
-          <Route path="/" element={<Navigate to={onboarded ? "/home" : "/onboarding"} replace />} />
-          <Route path="/onboarding" element={<OnboardingSlides />} />
-          <Route path="/home" element={onboarded ? <HomeScreen /> : <Navigate to="/onboarding" replace />} />
-          <Route path="/circles" element={onboarded ? <CirclesScreen /> : <Navigate to="/onboarding" replace />} />
-          <Route path="/invest" element={onboarded ? <InvestScreen /> : <Navigate to="/onboarding" replace />} />
-          <Route path="/ai" element={onboarded ? <AIChatScreen /> : <Navigate to="/onboarding" replace />} />
-          <Route path="/profile" element={onboarded ? <ProfileScreen /> : <Navigate to="/onboarding" replace />} />
-          <Route path="/transactions" element={onboarded ? <TransactionsScreen /> : <Navigate to="/onboarding" replace />} />
-          <Route path="/notifications" element={onboarded ? <NotificationsScreen /> : <Navigate to="/onboarding" replace />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <div
+          className="rp-phone-content"
+          style={fullHeightScreen ? { display: "flex", flexDirection: "column", overflow: "hidden" } : undefined}
+        >
+          <Routes>
+            <Route path="/" element={<Navigate to={onboarded ? "/home" : "/onboarding"} replace />} />
+            <Route path="/onboarding" element={<OnboardingSlides />} />
+            <Route path="/home" element={onboarded ? <HomeScreen /> : <Navigate to="/onboarding" replace />} />
+            <Route path="/circles" element={onboarded ? <CirclesScreen /> : <Navigate to="/onboarding" replace />} />
+            <Route path="/invest" element={onboarded ? <InvestScreen /> : <Navigate to="/onboarding" replace />} />
+            <Route path="/ai" element={onboarded ? <AIChatScreen /> : <Navigate to="/onboarding" replace />} />
+            <Route path="/profile" element={onboarded ? <ProfileScreen /> : <Navigate to="/onboarding" replace />} />
+            <Route path="/transactions" element={onboarded ? <TransactionsScreen /> : <Navigate to="/onboarding" replace />} />
+            <Route path="/notifications" element={onboarded ? <NotificationsScreen /> : <Navigate to="/onboarding" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
         {!hideNav && <BottomNav />}
         <CoinToast />
       </div>

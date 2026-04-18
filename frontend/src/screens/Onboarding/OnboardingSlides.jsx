@@ -36,23 +36,43 @@ const SLIDES = [
 export default function OnboardingSlides() {
   const [idx, setIdx] = useState(0);
   const [setupMode, setSetupMode] = useState(false);
+  const touchStartX = React.useRef(null);
   const nav = useNavigate();
 
   if (setupMode) return <SetupForm onDone={() => nav("/home")} />;
 
   const slide = SLIDES[idx];
 
+  const onTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0 && idx < SLIDES.length - 1) setIdx(idx + 1);
+      else if (dx > 0 && idx > 0) setIdx(idx - 1);
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <div
       className="rp-screen"
       style={{
-        minHeight: "100vh",
+        flex: 1,
+        minHeight: "100%",
         background: "linear-gradient(180deg, #2A0A8C 0%, #420FAE 50%, #5A1FD1 100%)",
         color: "#fff",
         padding: "0 20px",
         display: "flex",
         flexDirection: "column",
+        position: "relative",
+        overflow: "hidden",
+        touchAction: "pan-y",
       }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
       data-testid={`onboarding-slide-${idx}`}
     >
       {/* Floating decorative circles */}
@@ -146,18 +166,21 @@ export default function OnboardingSlides() {
         )}
       </div>
 
-      {/* Dots */}
+      {/* Dots - clickable */}
       <div style={{ display: "flex", gap: 8, justifyContent: "center", marginBottom: 20 }}>
         {SLIDES.map((_, i) => (
           <div
             key={i}
+            onClick={() => setIdx(i)}
             style={{
               width: i === idx ? 28 : 8,
               height: 8,
               background: i === idx ? "var(--rp-yellow)" : "rgba(255,255,255,0.3)",
               borderRadius: 999,
               transition: "width 0.3s ease",
+              cursor: "pointer",
             }}
+            data-testid={`onboarding-dot-${i}`}
           />
         ))}
       </div>
@@ -240,7 +263,9 @@ function SetupForm({ onDone }) {
     <div
       className="rp-screen"
       style={{
-        minHeight: "100vh",
+        flex: 1,
+        minHeight: "100%",
+        overflowY: "auto",
         background: "linear-gradient(180deg, #2A0A8C 0%, #420FAE 100%)",
         color: "#fff",
         padding: "56px 22px 28px",

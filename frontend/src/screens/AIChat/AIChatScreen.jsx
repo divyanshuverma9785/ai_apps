@@ -87,7 +87,9 @@ Batao kya jaanna chahte ho! 😊`,
         display: "flex",
         flexDirection: "column",
         padding: 0,
-        minHeight: "100vh",
+        flex: 1,
+        minHeight: 0,
+        position: "relative",
       }}
       data-testid="ai-chat-screen"
     >
@@ -119,7 +121,7 @@ Batao kya jaanna chahte ho! 😊`,
       <div
         ref={scrollerRef}
         className="rp-hide-scroll"
-        style={{ flex: 1, overflowY: "auto", padding: "16px 14px", paddingBottom: 200 }}
+        style={{ flex: 1, overflowY: "auto", padding: "16px 14px 140px" }}
       >
         {messages.map((m, i) => <Bubble key={i} m={m} />)}
         {loading && (
@@ -139,8 +141,8 @@ Batao kya jaanna chahte ho! 😊`,
         <div
           className="rp-hide-scroll"
           style={{
-            position: "absolute", bottom: 148, left: 0, right: 0,
-            padding: "0 14px", display: "flex", gap: 8, overflowX: "auto",
+            position: "absolute", bottom: 76, left: 0, right: 0,
+            padding: "0 14px 8px", display: "flex", gap: 8, overflowX: "auto",
           }}
         >
           {QUICK_CHIPS.map(c => (
@@ -169,7 +171,7 @@ Batao kya jaanna chahte ho! 😊`,
 
       {/* Input row */}
       <div style={{
-        position: "absolute", bottom: 72, left: 0, right: 0,
+        flexShrink: 0,
         padding: "12px 14px", background: "rgba(42,10,140,0.95)",
         backdropFilter: "blur(10px)", borderTop: "1px solid rgba(255,255,255,0.08)",
         display: "flex", gap: 8, alignItems: "center",
@@ -214,7 +216,7 @@ Batao kya jaanna chahte ho! 😊`,
 
       {voiceToast && (
         <div style={{
-          position: "fixed", bottom: 140, left: "50%", transform: "translateX(-50%)",
+          position: "absolute", bottom: 90, left: "50%", transform: "translateX(-50%)",
           background: "#fff", color: "var(--rp-deep)", padding: "10px 18px",
           borderRadius: 999, fontSize: 13, fontWeight: 600,
           boxShadow: "0 10px 30px rgba(0,0,0,0.25)", zIndex: 100,
