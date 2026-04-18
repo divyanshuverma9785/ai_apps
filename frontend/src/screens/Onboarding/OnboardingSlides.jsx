@@ -16,7 +16,7 @@ const SLIDES = [
     title: "Teen cheezein jo paisa badlati hain",
     cards: [
       { icon: "🪞", heading: "DHAN DARPAN", desc: "AI aapka kharch track karta hai — bina kuch likhe" },
-      { icon: "⭕", heading: "PAISA CIRCLE", desc: "Dosto ke saath committee — digital, safe, smart" },
+      { icon: "⭕", heading: "PAISA CIRCLE", desc: "Circle banao, paisa badhao — apno ke saath" },
       { icon: "🌱", heading: "MUNAFA ENGINE", desc: "Bachat apne aap invest ho jaati hai" },
     ],
     cta: "Aage Badhein",
