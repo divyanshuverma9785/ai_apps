@@ -1,11 +1,4 @@
 {
-  "experimentalServices": {
-    "frontend": {
-      "root": "frontend",
-      "routePrefix": "/",
-      "framework": "create-react-app"
-    }
-  },
   "rewrites": [
     { "source": "/((?!static|favicon|manifest|logo|asset-manifest).*)", "destination": "/index.html" }
   ]
